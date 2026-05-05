@@ -1,0 +1,9 @@
+a{
+    text-decoration: none;
+    color: white;
+}
+
+.titulo{
+ display: flex;
+ align-items: end;
+}
