@@ -1,14 +1,4 @@
 <x-layout titulo="Admin" textoLadoImagem="Administração">
-  
-    <!--<div class="d-flex justify-content-between p-2 m-2"> 
-      
-    <button class="btn btn-primary p-2 m-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
-      aria-controls="staticBackdrop">
-      Cadastrar
-    </button>
-      <a class="btn btn-danger p-2 m-2" href="/" role="button">Sair Pagina Admin</a> 
-    </div> -->
-    
     @foreach($itensPerdidos as $item)
     <a href="" class="card" >
     <div class="col">
