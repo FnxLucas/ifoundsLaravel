@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Item;
 
 class AdministracaoController extends Controller
 {
@@ -11,57 +12,8 @@ class AdministracaoController extends Controller
      */
     public function index(Request $request)
     {   
-        $itensPerdidos =[
-            [
-            'id'=>1,
-            'titulo'=>'celular',
-            'descricao'=>'iphone 15',
-            'localizacao'=>'Bloco A'
-            ],
-            [
-            'id'=>2,
-            'titulo'=>'carteira',
-            'descricao'=>'Carteira Preta',
-            'localizacao'=>'Bloco F'
-            ],
-             [
-            'id'=>3,
-            'titulo'=>'celular',
-            'descricao'=>'iphone 15',
-            'localizacao'=>'Bloco A'
-            ],
-            [
-            'id'=>4,
-            'titulo'=>'carteira',
-            'descricao'=>'Carteira Preta',
-            'localizacao'=>'Bloco F'
-            ],
-            [
-            'id'=>1,
-            'titulo'=>'celular',
-            'descricao'=>'iphone 15',
-            'localizacao'=>'Bloco A'
-            ],
-            [
-            'id'=>2,
-            'titulo'=>'carteira',
-            'descricao'=>'Carteira Preta',
-            'localizacao'=>'Bloco F'
-            ],
-             [
-            'id'=>3,
-            'titulo'=>'celular',
-            'descricao'=>'iphone 15',
-            'localizacao'=>'Bloco A'
-            ],
-            [
-            'id'=>4,
-            'titulo'=>'carteira',
-            'descricao'=>'Carteira Preta',
-            'localizacao'=>'Bloco F'
-            ]
-        ];
-        return view('itens.index',['itensPerdidos'=>$itensPerdidos]);
+        $itensPerdidos = Item::all();
+        return view('itens.index',compact('itensPerdidos'));
     }
 
     /**

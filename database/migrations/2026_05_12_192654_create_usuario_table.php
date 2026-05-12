@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('itens', function (Blueprint $table) {
+        Schema::create('usuario', function (Blueprint $table) {
             $table->id();
-            $table->string('nome',500);
-            $table->string('localizacao',500)->isNotEmpty();
-            $table->text('descricao');
-            $table->string('quemAchou',500)->default(null)->nullable(true);
-            $table->string('img')->default('placeHolder.jpg');
+            $table->string('login',500)->unique();
+            $table->string('senha',50);
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('itens');
+        Schema::dropIfExists('usuario');
     }
 };

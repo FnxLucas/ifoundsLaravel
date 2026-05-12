@@ -1,4 +1,5 @@
 <x-layout titulo="Admin" textoLadoImagem="Administração">
+
     @foreach($itensPerdidos as $item)
     <a href="" class="card" >
     <div class="col">
@@ -7,10 +8,10 @@
           <img src="img/placeHolder.jpg" alt="Item Perdido Imagem">
         </div>
         <div class="card_Content">
-            <p class="card_Title">{{$item['titulo']}}</p>
+            <p class="card_Title">{{$item->nome}}</p>
             <div class="card_Local">
               <img src="img/iconLocation.png" alt="Localização" class="iconLocation">
-              <p> {{$item['localizacao']}}</p>
+              <p> {{$item->localizacao}}</p>
             </div> 
         </div>
       </div>
