@@ -1,7 +1,7 @@
 <x-layout titulo="IFounds" textoLadoImagem="O que queremos achar">
 
     @foreach($itensPerdidos as $item)
-    <a href="" class="card" >
+    <a href="/item/{{$item->id}}" class="card" name="{{$item['id']}}">
     <div class="col">
       <div class="card_Box" name="{{$item['id']}}">
         <div class="card_Img"> 
@@ -10,7 +10,7 @@
         <div class="card_Content">
             <p class="card_Title">{{$item->nome}}</p>
             <div class="card_Local">
-              <img src="img/iconLocation.png" alt="Localização" class="iconLocation">
+              <img src="{{ asset('img/iconLocation.png') }}" alt="Localização" class="iconLocation">
               <p> {{$item->localizacao}}</p>
             </div> 
         </div>

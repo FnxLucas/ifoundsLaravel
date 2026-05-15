@@ -76,18 +76,151 @@
     margin-right: 5px;
 }
 
+.ap_Page {
+  box-sizing: border-box;
+  background: #f7f4ef;
+  font-family: 'DM Sans', sans-serif;
+  color: #1a1a1a;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ap_Page *, .ap-page *::before, .ap-page *::after {
+  box-sizing: border-box;
+}
+
+.ap_Header {
+  width: 100%;
+  background: #1a1a1a;
+  padding: 0 40px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ap_Logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.ap_Logo span { 
+  color: #f0b429; 
+}
+
+.ap_Header_Tag {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+.ap_Card {
+  margin: 52px auto;
+  width: 100%;
+  max-width: 480px;
+  background: transparent;
+  padding: 0 24px;
+}
+
+.ap_Col_Left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ap_Card_Image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #eeeeee;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.ap_Card_Image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .5s ease;
+}
+
+.ap_Card_Image:hover img { 
+  transform: scale(1.04); 
+}
+
+.ap_Description {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555555;
+  margin: 0;
+}
+
+.ap_Item_Name {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.ap_Btn_Found {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: #f0b429;
+  color: #1a1a1a;
+  border: 2px solid #1a1a1a;
+  border-radius: 4px;
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 3px 3px 0 #1a1a1a;
+  transition: transform .12s, box-shadow .12s, background .12s;
+}
+
+.ap_Btn_Found:hover {
+  background: #ffc433;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 #1a1a1a;
+}
+
+.ap_Btn_Found:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #1a1a1a;
+}
+
 @media (max-width: 768px) {
-    .card_Box {
-        flex-direction: column;
-        gap: 5px;
-    }
-    .card_Img {
-        width: 100%;
-        height: 4em;
-    }
-    .card_Content {
-        width: 100%;
-        height: auto;
-        min-height: 4em;
-    }
+  .card_Box {
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .card_Img {
+    width: 100%;
+    height: 4em;
+  }
+  
+  .card_Content {
+    width: 100%;
+    height: auto;
+    min-height: 4em;
+  }
+}
+
+@media (max-width: 620px) {
+  .ap_Card { 
+    padding: 0 16px; 
+  }
 }

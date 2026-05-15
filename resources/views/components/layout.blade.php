@@ -2,18 +2,11 @@
 
 <!doctype html>
 <html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{$titulo}}</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
-  <link rel="stylesheet" href="css/style.css"/>
-  <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-</head>
+<x-headLayout titulo="{{$titulo}}">
+</x-headLayout>
 <body>
   <header class="d-flex justify-content-between p-2 align-items-center bg-success">
-    <a class="titulo" href="/itensperdidos"> <img class="w-25 p-2" src="img/Ifounds_logo.png" alt="Logo Ifounds"> <p id="titulo">- {{$textoLadoImagem}}</p>  </a></a>
+    <a class="titulo" href="/itensperdidos"> <img class="w-25 p-2" src="{{ asset('img/Ifounds_logo.png') }}" alt="Logo Ifounds"> <p id="titulo">- {{$textoLadoImagem}}</p>  </a>
     <div class="d-flex justify-content-between p-2 m-2">
 
     <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"

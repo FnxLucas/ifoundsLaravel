@@ -10,7 +10,7 @@
         <div class="card_Content">
             <p class="card_Title">{{$item->nome}}</p>
             <div class="card_Local">
-              <img src="img/iconLocation.png" alt="Localização" class="iconLocation">
+              <img src="{{ asset('img/iconLocation.png') }}" alt="Localização" class="iconLocation">
               <p> {{$item->localizacao}}</p>
             </div> 
         </div>
