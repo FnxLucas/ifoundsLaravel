@@ -30,7 +30,14 @@ class ItemPerdidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = new Item();
+        $item->nome = $request->nome;
+        $item->localizacao = $request->localizacao;
+        $item->descricao = $request->descricao;
+        $item->img = $request->file('imagem')->store('imagensItens','public');
+        $item->save();
+
+        return redirect('/itensperdidos');
     }
 
     /**

@@ -11,4 +11,6 @@ Route::get('/itensperdidos',[ItemPerdidoController::class, 'index']);
 
 Route::get('/admin', [AdministracaoController::class, 'index']);
 
-Route::get('/item/{id}', [itemPaginaController::class, 'index']);
+Route::get('/item/{id}', [ItemPaginaController::class, 'index']);
+
+Route::post('/itensperdidos/novo', [ItemPerdidoController::class, 'store']);

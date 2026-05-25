@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 
-class itemPaginaController extends Controller
+class ItemPaginaController extends Controller
 {
     /**
      * Display a listing of the resource.

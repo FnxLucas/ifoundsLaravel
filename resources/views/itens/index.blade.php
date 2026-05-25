@@ -1,11 +1,11 @@
 <x-layout titulo="Admin" textoLadoImagem="Administração">
 
-    @foreach($itensPerdidos as $item)
-    <a href="" class="card" >
+ @foreach($itensPerdidos as $item)
+    <a href="/item/{{$item->id}}" class="card" name="{{$item['id']}}">
     <div class="col">
       <div class="card_Box" name="{{$item['id']}}">
         <div class="card_Img"> 
-          <img src="{{asset('img/'.$item->img)}}" alt="Item Perdido Imagem">
+          <img src="{{asset('storage/'.$item->img)}}" alt="Item Perdido Imagem">
         </div>
         <div class="card_Content">
             <p class="card_Title">{{$item->nome}}</p>

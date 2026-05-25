@@ -5,7 +5,7 @@
     <div class="col">
       <div class="card_Box" name="{{$item['id']}}">
         <div class="card_Img"> 
-          <img src="{{asset('img/'.$item->img)}}" alt="Item Perdido Imagem">
+          <img src="{{asset('storage/'.$item->img)}}" alt="Item Perdido Imagem">
         </div>
         <div class="card_Content">
             <p class="card_Title">{{$item->nome}}</p>
