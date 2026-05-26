@@ -1,4 +1,4 @@
-<x-layout titulo="{{$item->nome}}" textoLadoImagem="Detalhes do item">
+<x-layout titulo="{{$item->nome}}" textoLadoImagem="Detalhes do item" linkPagina="/itensperdidos">
     
     <div class="ap_Card">
       <div class="ap_Col_Left">

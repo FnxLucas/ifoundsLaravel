@@ -7,7 +7,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
-        <form action="/itensperdidos/novo" method="post" enctype="multipart/form-data">
+        <form action="{{ $linkPagina }}/novo" method="post" enctype="multipart/form-data">
           
           @csrf 
 

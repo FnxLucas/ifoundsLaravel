@@ -29,7 +29,14 @@ class AdministracaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $item = new Item();
+        $item->nome = $request->nome;
+        $item->localizacao = $request->localizacao;
+        $item->descricao = $request->descricao;
+        $item->img = $request->file('imagem')->store('imagensItens','public');
+        $item->save();
+
+        return redirect('/admin');
     }
 
     /**
@@ -51,16 +58,22 @@ class AdministracaoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        //
+        $item = Item::find($request->id);
+        $item->nome = $request->nome;
+        $item->localizacao = $request->localizacao;
+        $item->descricao = $request->descricao;
+        $item->save();
+        return redirect('/admin')->with('sucesso', 'Item atualizado com sucesso!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        Item::destroy($request->id);
+        return redirect('/admin')->with('sucesso', 'Item deletado com sucesso!');
     }
 }

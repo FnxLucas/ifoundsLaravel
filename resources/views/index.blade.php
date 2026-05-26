@@ -1,4 +1,4 @@
-<x-layout titulo="IFounds" textoLadoImagem="O que queremos achar">
+<x-layout titulo="IFounds" textoLadoImagem="O que queremos achar" linkPagina="/itensperdidos">
 
     @foreach($itensPerdidos as $item)
     <a href="/item/{{$item->id}}" class="card" name="{{$item['id']}}">
