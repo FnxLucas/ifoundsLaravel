@@ -11,7 +11,7 @@
         </p>
         <div class="card_Local">
               <img src="{{asset('img/iconLocation.png')}}" alt="Localização" class="iconLocation">
-              <p> {{$item->localizacao}}</p>
+              <p class="textoLocalizacao"> {{$item->localizacao}}</p>
         </div>  
         <a type="button" class="ap_Btn_Found" href="">Eu achei este item!</a>
       </div>
