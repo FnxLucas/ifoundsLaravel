@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Achados & Perdidos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f4ef;
+      --ink: #1a1a1a;
+      --muted: #888;
+      --border: #ddd;
+      --yellow: #f0b429;
+      --yellow-hover: #ffc433;
+      --white: #ffffff;
+    }
+
+    body {
+      background: var(--bg);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* TOPBAR */
+    header {
+      width: 100%;
+      background: var(--ink);
+      padding: 0 40px;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--yellow); }
+    .header-tag {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* CARD */
+    .card {
+      margin: 52px auto;
+      width: 100%;
+      max-width: 960px;
+      background: transparent;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 64px;
+      align-items: start;
+    }
+
+    /* ESQUERDA: imagem + descrição */
+    .col-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* IMAGEM */
+    .card-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      background: #eee;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s ease;
+    }
+    .card-image:hover img { transform: scale(1.04); }
+
+    /* DESCRIÇÃO */
+    .description {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #555;
+      padding: 20px 0 0;
+    }
+
+    /* DIREITA: nome + botão */
+    .col-right {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    /* NOME */
+    .item-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    /* BOTÃO */
+    .btn-found {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--yellow);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 4px;
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform .12s, box-shadow .12s, background .12s;
+    }
+    .btn-found:hover {
+      background: var(--yellow-hover);
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .btn-found:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--ink);
+    }
+
+    @media (max-width: 620px) {
+      .card { grid-template-columns: 1fr; gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">achei<span>!</span></div>
+    <div class="header-tag">Sistema de Achados &amp; Perdidos</div>
+  </header>
+
+  <div class="card">
+
+    <!-- ESQUERDA: imagem + descrição -->
+    <div class="col-left">
+      <div class="card-image">
+        <img src="https://placehold.co/900x675/cccccc/555555?text=Foto+do+Item" alt="Foto do item perdido"/>
+      </div>
+      <p class="description">
+        Item encontrado na Praça do Rádio Clube, Campo Grande — MS, no dia 10/05/2025 por volta das 18h. 
+        Estava próximo ao banco de madeira na entrada principal. Caso seja seu, entre em contato.
+      </p>
+    </div>
+
+    <!-- DIREITA: nome + botão -->
+    <div class="col-right">
+      <h1 class="item-name">Carteira Preta<br/>masculina</h1>
+      <button class="btn-found">✋ Eu achei este item!</button>
+    </div>
+
+  </div>
+
+</body>
+</html>
