@@ -3,8 +3,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemPerdidoController;
 use App\Http\Controllers\AdministracaoController;
 use App\Http\Controllers\itemPaginaController;
+use App\Http\Controllers\LoginPaginaController;
 
-Route::get('/',[ItemPerdidoController::class, 'index']);
+Route::get('/',[LoginPaginaController::class, 'index']);
 Route::get('/itensperdidos',[ItemPerdidoController::class, 'index']);
 Route::get('/admin', [AdministracaoController::class, 'index']);
 Route::get('/item/{id}', [ItemPaginaController::class, 'index']);
