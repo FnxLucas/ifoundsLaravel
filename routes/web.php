@@ -6,6 +6,8 @@ use App\Http\Controllers\itemPaginaController;
 use App\Http\Controllers\LoginPaginaController;
 
 Route::get('/',[LoginPaginaController::class, 'index']);
+Route::post('/registrar',[LoginPaginaController::class, 'register']);
+
 Route::get('/itensperdidos',[ItemPerdidoController::class, 'index']);
 Route::get('/admin', [AdministracaoController::class, 'index']);
 Route::get('/item/{id}', [ItemPaginaController::class, 'index']);

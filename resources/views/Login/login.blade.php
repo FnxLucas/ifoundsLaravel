@@ -12,10 +12,10 @@
 <div class="wrapper">
 
   <!-- ═══════════ LOGIN ═══════════ -->
-  <x-loginLayout>></x-loginLayout>
+  <x-loginLayout></x-loginLayout>
 
   <!-- ═══════════ REGISTRO ═══════════ -->
-  <x-registerLayout>></x-registerLayout>
+  <x-registerLayout></x-registerLayout>
   
 </div><!-- /wrapper -->
 

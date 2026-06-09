@@ -52,11 +52,11 @@
     else                                             { setError('l-email',    'err-l-email',    false); }
     if (!pw)                                         { setError('l-password', 'err-l-password', true);  valid = false; }
     else                                             { setError('l-password', 'err-l-password', false); }
-    if (valid) alert('Login realizado com sucesso!');
+    if (valid);
   }
 
   /* ── Registro ── */
-  function doSignup() {
+function doSignup(event) {
     var fname   = document.getElementById('r-fname').value.trim();
     var lname   = document.getElementById('r-lname').value.trim();
     var email   = document.getElementById('r-email').value.trim();
@@ -68,9 +68,14 @@
     if (!fname)  { setError('r-fname',    'err-r-fname',    true);  valid = false; } else { setError('r-fname',    'err-r-fname',    false); }
     if (!lname)  { setError('r-lname',    'err-r-lname',    true);  valid = false; } else { setError('r-lname',    'err-r-lname',    false); }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError('r-email', 'err-r-email', true); valid = false; } else { setError('r-email', 'err-r-email', false); }
-    if (pw.length < 8)           { setError('r-password', 'err-r-password', true);  valid = false; } else { setError('r-password', 'err-r-password', false); }
-    if (!confirm || pw !== confirm) { setError('r-confirm', 'err-r-confirm', true);  valid = false; } else { setError('r-confirm', 'err-r-confirm', false); }
-    if (!terms)  { setError(null, 'err-r-terms', true);  valid = false; } else { setError(null, 'err-r-terms', false); }
+    if (pw.length < 8)              { setError('r-password', 'err-r-password', true);  valid = false; } else { setError('r-password', 'err-r-password', false); }
+    if (!confirm || pw !== confirm) { setError('r-confirm',  'err-r-confirm',  true);  valid = false; } else { setError('r-confirm',  'err-r-confirm',  false); }
+    if (!terms)  { setError(null,  'err-r-terms', true);  valid = false; } else { setError(null, 'err-r-terms', false); }
 
-    if (valid) alert('Conta criada com sucesso!');
-  }
+    if (!valid) {
+        if (event) event.preventDefault();
+        return false;
+    }
+
+    return true;
+}
