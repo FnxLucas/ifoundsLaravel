@@ -2,8 +2,15 @@
   function ir(tela) {
     document.querySelectorAll('.screen').forEach(function(s) {
       s.classList.remove('active');
+      setTimeout(function() {
+        if (!s.classList.contains('active')) s.style.display = 'none';
+      }, 400);
     });
-    document.getElementById('screen-' + tela).classList.add('active');
+    var nextScreen = document.getElementById('screen-' + tela);
+    nextScreen.style.display = 'block';
+    // Trigger reflow for CSS animation
+    void nextScreen.offsetWidth;
+    nextScreen.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
