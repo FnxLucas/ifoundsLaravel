@@ -17,6 +17,7 @@ use App\Http\Controllers\LoginPaginaController;
 Route::middleware('auth')->group(function(){
     Route::get('/itensperdidos',[ItemPerdidoController::class,'index']);
     Route::get('/item/{id}',[ItemPaginaController::class, 'index']);
+    Route::post('/item/{id}/reivindicar',[ItemPaginaController::class, 'reivindicar']);
     Route::post('/itensperdidos/novo',[ItemPerdidoController::class ,'store']);
 });
 

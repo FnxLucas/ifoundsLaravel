@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 
 class ItemPaginaController extends Controller
@@ -64,5 +65,20 @@ class ItemPaginaController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function reivindicar(Request $request, string $id)
+    {
+        $item = Item::findOrFail($id);
+        
+        // Verifica se o item já foi reivindicado
+        if ($item->usuario_reivindicante_id) {
+            return back()->with('erro', 'Este item já foi reivindicado por outra pessoa.');
+        }
+
+        $item->usuario_reivindicante_id = Auth::id();
+        $item->save();
+
+        return back()->with('sucesso', 'Item reivindicado com sucesso! Entraremos em contato.');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AdministracaoController extends Controller
 {
@@ -32,6 +33,7 @@ class AdministracaoController extends Controller
     public function store(Request $request)
     {
         $item = new Item();
+        $item->usuario_encontrou_id = Auth::id();
         $item->nome = $request->nome;
         $item->localizacao = $request->localizacao;
         $item->descricao = $request->descricao;

@@ -17,4 +17,14 @@ class Item extends Model
         'descricao',
         'quemAchou'
     ];
+
+    public function quemEncontrou()
+    {
+        return $this->belongsTo(User::class, 'usuario_encontrou_id');
     }
+
+    public function quemReivindicou()
+    {
+        return $this->belongsTo(User::class, 'usuario_reivindicante_id');
+    }
+}
