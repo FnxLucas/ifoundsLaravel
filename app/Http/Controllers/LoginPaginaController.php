@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Validation\ValidationException;
 
 class LoginPaginaController extends Controller
 {
@@ -14,29 +15,53 @@ class LoginPaginaController extends Controller
      */
     public function index()
     {
+        if (Auth::check()) {
+            return redirect('/itensperdidos');
+        }
+
         return view('Login.login');
     }
-
+    
     public function register(Request $request)
     {
         // 1. Validação no servidor (SEMPRE faça isso, mesmo com validação no JS)
-        $request->validate([
-            'first_name' => 'required|string|max:100',
+        $dadosValidados = $request->validate([
+            'name' => 'required|string|max:100',
             'email'      => 'required|email|unique:users,email',
-            'password'   => 'required|min:8|confirmed', // confirmed = precisa de password_confirmation
+            'password'   => 'required|min:8|confirmed',
         ]);
 
-        // 2. Cria o usuário (senha já vai com hash automático via cast)
-        $user = User::create([
-            'name' => $request->first_name,
-            'email'      => $request->email,
-            'password'   => Hash::make($request->password),
-        ]);
+        $user = User::create($dadosValidados);
 
-        // 3. Loga o usuário automaticamente após o cadastro
         Auth::login($user);
 
-        // 4. Redireciona para a home (ou onde quiser)
+        return redirect('/itensperdidos');
+    }
+    
+    public function login(Request $request)
+    {
+        $dadosValidados = $request->validate([
+            'email'      => 'required|email',
+            'password'   => 'required|string',
+        ]);
+
+        if(Auth::attempt($dadosValidados)){
+            $request->session()->regenerate();
+            return redirect()->intended('/itensperdidos');
+        } 
+        
+        throw ValidationException::withMessages([
+            'credenciais' => 'As credenciais estão incorretas.',
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect('/');
     }
 

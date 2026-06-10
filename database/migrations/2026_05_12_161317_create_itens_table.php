@@ -12,18 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('itens', function (Blueprint $table) {
-            /*
-            Quando adicionar USUARIOS:
-             $table->foreignId('usuario_encontrou_id')
-            ->constrained('users')
-            ->cascadeOnDelete();
+
+            $table->id();
+            
+            $table->foreignId('usuario_encontrou_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
 
             $table->foreignId('usuario_reivindicante_id')
-             ->nullable()
-            ->constrained('users')
-            ->nullOnDelete();
-            */
-            $table->id();
+                ->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
             $table->string('nome',500);
             $table->string('localizacao',500)->isNotEmpty();
             $table->text('descricao');

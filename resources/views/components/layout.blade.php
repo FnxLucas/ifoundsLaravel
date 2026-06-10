@@ -11,7 +11,7 @@
 
     <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop"
       aria-controls="staticBackdrop"> Cadastrar</button>
-    <a type="button" class="btn btn-danger p-2 m-2" href="/" role="button">Loggout</a>
+    <a type="button" class="btn btn-danger p-2 m-2" href="/logout" role="button">Loggout</a>
     </div>
   </header>
 

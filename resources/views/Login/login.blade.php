@@ -11,13 +11,10 @@
 
 <div class="wrapper">
 
-  <!-- ═══════════ LOGIN ═══════════ -->
   <x-loginLayout></x-loginLayout>
-
-  <!-- ═══════════ REGISTRO ═══════════ -->
   <x-registerLayout></x-registerLayout>
   
-</div><!-- /wrapper -->
+</div>
 
 <script src="{{asset('script/scripts.js')}}"></script>
 </body>

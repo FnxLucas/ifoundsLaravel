@@ -52,7 +52,10 @@
     else                                             { setError('l-email',    'err-l-email',    false); }
     if (!pw)                                         { setError('l-password', 'err-l-password', true);  valid = false; }
     else                                             { setError('l-password', 'err-l-password', false); }
-    if (valid);
+    if (!valid) {
+        if (event) event.preventDefault();
+        return false;
+    }
   }
 
   /* ── Registro ── */

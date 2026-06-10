@@ -8,7 +8,7 @@
       <div class="row-1">
         <div class="field">
           <label for="r-fname">Nome</label>
-          <input type="text" id="r-fname" name="first_name" placeholder="João">
+          <input type="text" id="r-fname" name="name" placeholder="João">
           <div class="error-msg" id="err-r-fname">Campo obrigatório.</div>
         </div>
       </div>
