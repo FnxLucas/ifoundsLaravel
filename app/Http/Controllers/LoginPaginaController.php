@@ -31,7 +31,13 @@ class LoginPaginaController extends Controller
             'password'   => 'required|min:8|confirmed',
         ]);
 
+        $is_first = User::count() === 0;
         $user = User::create($dadosValidados);
+
+        if ($is_first) {
+            $user->is_admin = true;
+            $user->save();
+        }
 
         Auth::login($user);
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\User;
 
 class AdministracaoController extends Controller
 {
@@ -13,7 +14,8 @@ class AdministracaoController extends Controller
     public function index(Request $request)
     {   
         $itensPerdidos = Item::all();
-        return view('itens.index',compact('itensPerdidos'));
+        $usuarios = User::all();
+        return view('itens.index',compact('itensPerdidos', 'usuarios'));
     }
 
     /**
@@ -75,5 +77,14 @@ class AdministracaoController extends Controller
     {
         Item::destroy($request->id);
         return redirect('/admin')->with('sucesso', 'Item deletado com sucesso!');
+    }
+
+    public function tornarAdmin(Request $request)
+    {
+        $user = User::findOrFail($request->user_id);
+        $user->is_admin = true;
+        $user->save();
+
+        return redirect('/admin')->with('sucesso', 'Usuário ' . $user->name . ' promovido a administrador!');
     }
 }

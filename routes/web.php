@@ -25,4 +25,5 @@ Route::middleware('auth')->group(function(){
     Route::post('/admin/novo',[AdministracaoController::class, 'store']);
     Route::delete('/admin/deletar',[AdministracaoController::class, 'destroy']);
     Route::put('/admin/editar', [AdministracaoController::class, 'update']);
+    Route::post('/admin/tornar-admin', [AdministracaoController::class, 'tornarAdmin']);
 });

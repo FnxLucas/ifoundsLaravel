@@ -14,10 +14,24 @@
         </svg>
       </button>
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="hamburgerMenu">
-        <li><button class="dropdown-item" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">Cadastrar</button></li>
+    <li>
+        <button class="dropdown-item" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+            Cadastrar
+        </button>
+    </li>
+    
+    @if(Auth::user()->is_admin)
         <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item text-danger" href="/logout">Loggout</a></li>
-      </ul>
+        <li>
+            <a class="dropdown-item" href="/admin">Administração</a>
+        </li>
+    @endif
+    
+    <li><hr class="dropdown-divider"></li>
+    <li>
+        <a class="dropdown-item text-danger" href="/logout">Logout</a>
+    </li>
+</ul>
     </div>
   </header>
 
