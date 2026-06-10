@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function(){
     Route::post('/itensperdidos/novo',[ItemPerdidoController::class ,'store']);
 });
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth','admin')->group(function(){
     Route::get('/admin',[AdministracaoController::class, 'index']);
     Route::post('/admin/novo',[AdministracaoController::class, 'store']);
     Route::delete('/admin/deletar',[AdministracaoController::class, 'destroy']);
