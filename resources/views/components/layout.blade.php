@@ -14,6 +14,10 @@
         </svg>
       </button>
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="hamburgerMenu">
+   <li>
+        <a class="dropdown-item" href="/perfil">Perfil</a>
+    </li>
+    <li><hr class="dropdown-divider"></li>
     <li>
         <button class="dropdown-item" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
             Cadastrar

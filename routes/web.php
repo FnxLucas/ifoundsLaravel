@@ -4,7 +4,7 @@ use App\Http\Controllers\ItemPerdidoController;
 use App\Http\Controllers\AdministracaoController;
 use App\Http\Controllers\itemPaginaController;
 use App\Http\Controllers\LoginPaginaController;
-
+use App\Http\Controllers\PerfilController;
 
 
     Route::get('/',[LoginPaginaController::class, 'index'])->name('login');
@@ -16,9 +16,10 @@ use App\Http\Controllers\LoginPaginaController;
 
 Route::middleware('auth')->group(function(){
     Route::get('/itensperdidos',[ItemPerdidoController::class,'index']);
+    Route::post('/itensperdidos/novo',[ItemPerdidoController::class ,'store']);
     Route::get('/item/{id}',[ItemPaginaController::class, 'index']);
     Route::post('/item/{id}/reivindicar',[ItemPaginaController::class, 'reivindicar']);
-    Route::post('/itensperdidos/novo',[ItemPerdidoController::class ,'store']);
+    Route::get('/perfil',[PerfilController::class, 'index']);
 });
 
 Route::middleware('auth','admin')->group(function(){
