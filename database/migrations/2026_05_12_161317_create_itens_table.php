@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('itens', function (Blueprint $table) {
+
             $table->id();
+
             $table->string('nome',500);
             $table->string('localizacao',500)->isNotEmpty();
             $table->text('descricao');

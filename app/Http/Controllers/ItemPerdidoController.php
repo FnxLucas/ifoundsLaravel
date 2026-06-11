@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 
 class ItemPerdidoController extends Controller
@@ -31,10 +32,12 @@ class ItemPerdidoController extends Controller
     public function store(Request $request)
     {
         $item = new Item();
+        $item->usuario_encontrou_id = Auth::id();
         $item->nome = $request->nome;
         $item->localizacao = $request->localizacao;
         $item->descricao = $request->descricao;
-        $item->img = $request->file('imagem')->store('imagensItens','public');
+        $item->quemAchou = $request->quemAchou;
+        $item->img = $request->file('imagem')->store('imagensItens', 'public');
         $item->save();
 
         return redirect('/itensperdidos');
