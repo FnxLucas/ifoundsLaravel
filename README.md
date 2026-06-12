@@ -51,37 +51,6 @@ Voce pode manter o diagrama em Mermaid abaixo e tambem adicionar uma imagem expo
 
 ![Diagrama do banco de dados](docs/screenshots/diagrama-banco.png)
 
-```mermaid
-erDiagram
-    USERS ||--o{ ITENS : "encontrou"
-    USERS ||--o{ ITENS : "reivindicou"
-
-    USERS {
-        bigint id PK
-        string name
-        string email UK
-        timestamp email_verified_at
-        string password
-        boolean is_admin
-        string remember_token
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    ITENS {
-        bigint id PK
-        bigint usuario_encontrou_id FK
-        bigint usuario_reivindicante_id FK
-        string nome
-        string localizacao
-        text descricao
-        string quemAchou
-        string img
-        timestamp created_at
-        timestamp updated_at
-    }
-```
-
 ### Tabelas relevantes
 
 | Tabela | Descricao |
