@@ -1,58 +1,293 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# IFounds
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
+![Laravel](https://img.shields.io/badge/Laravel-13.x-red)
+![PHP](https://img.shields.io/badge/PHP-%5E8.3-777bb4)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-## About Laravel
+## 📌 Descricao
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+O **IFounds** e um sistema web desenvolvido em **Laravel** para cadastro, consulta e reivindicacao de itens perdidos. A aplicacao permite que usuarios autenticados publiquem itens encontrados, visualizem detalhes dos objetos cadastrados e reivindiquem um item quando ele pertencer a eles.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+O projeto tambem possui uma area administrativa para gerenciamento dos itens cadastrados e promocao de usuarios a administradores.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ✨ Funcionalidades principais
 
-## Learning Laravel
+- Cadastro de usuarios.
+- Login e logout com autenticacao do Laravel.
+- Primeiro usuario cadastrado e promovido automaticamente a administrador.
+- Listagem de itens perdidos.
+- Cadastro de novo item encontrado com imagem, nome, localizacao e descricao.
+- Pagina de detalhes do item.
+- Reivindicacao de item por usuario autenticado.
+- Pagina de perfil com itens publicados pelo usuario logado.
+- Painel administrativo protegido por middleware.
+- Edicao e exclusao de itens pelo administrador.
+- Listagem de usuarios no painel administrativo.
+- Promocao de usuarios comuns para administradores.
+- Upload de imagens no disco `public` do Laravel.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🧰 Tecnologias utilizadas
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **PHP 8.3+**
+- **Laravel 13**
+- **Blade Templates**
+- **Laravel Auth / Sessions**
+- **Eloquent ORM**
+- **PostgreSQL** configurado no `.env.example`
+- **Vite 8** *(opcional, para desenvolvimento/build de assets)*
+- **Tailwind CSS 4** *(opcional, para desenvolvimento/build de assets)*
+- **Bootstrap** via CDN nas views
+- **Composer**
+- **NPM** *(opcional, apenas se for usar o Vite)*
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## 🗄️ Banco de dados
 
-## Agentic Development
+O sistema utiliza as tabelas padrao do Laravel para usuarios, cache, jobs e sessoes, alem da tabela principal `itens`.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+### Diagrama ER
 
-```bash
-composer require laravel/boost --dev
+Voce pode manter o diagrama em Mermaid abaixo e tambem adicionar uma imagem exportada do diagrama neste caminho:
 
-php artisan boost:install
+![Diagrama do banco de dados](docs/screenshots/diagrama-banco.png)
+
+```mermaid
+erDiagram
+    USERS ||--o{ ITENS : "encontrou"
+    USERS ||--o{ ITENS : "reivindicou"
+
+    USERS {
+        bigint id PK
+        string name
+        string email UK
+        timestamp email_verified_at
+        string password
+        boolean is_admin
+        string remember_token
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    ITENS {
+        bigint id PK
+        bigint usuario_encontrou_id FK
+        bigint usuario_reivindicante_id FK
+        string nome
+        string localizacao
+        text descricao
+        string quemAchou
+        string img
+        timestamp created_at
+        timestamp updated_at
+    }
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Tabelas relevantes
 
-## Contributing
+| Tabela | Descricao |
+| --- | --- |
+| `users` | Armazena usuarios cadastrados e o campo `is_admin` para permissao administrativa. |
+| `itens` | Armazena os itens perdidos/encontrados cadastrados na plataforma. |
+| `sessions` | Armazena sessoes de usuarios, conforme configuracao do Laravel. |
+| `cache` / `cache_locks` | Tabelas de cache da aplicacao. |
+| `jobs` / `job_batches` / `failed_jobs` | Estrutura de filas do Laravel. |
+| `password_reset_tokens` | Tokens para recuperacao de senha, gerado pela migration padrao. |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+> Observacao: existe uma migration chamada `2026_05_25_213005_truncate_itens.php` que limpa a tabela `itens` ao ser executada. Use migrations em ambientes com dados reais com cuidado.
 
-## Code of Conduct
+## ✅ Pre-requisitos
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Antes de iniciar, tenha instalado:
 
-## Security Vulnerabilities
+- PHP **8.3 ou superior**
+- Composer
+- PostgreSQL
+- Git
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Opcionalmente, instale **Node.js e NPM** caso queira rodar o Vite, recompilar assets ou usar os scripts de frontend definidos em `package.json`.
 
-## License
+Tambem e necessario ter as extensoes PHP exigidas pelo Laravel habilitadas, como `pdo`, `mbstring`, `openssl`, `tokenizer`, `xml`, `ctype`, `json` e a extensao do banco utilizado, por exemplo `pdo_pgsql`.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## ⚙️ Instalacao e configuracao
+
+1. Clone o repositorio:
+
+```bash
+git clone <url-do-repositorio>
+cd ifoundsLaravel
+```
+
+2. Instale as dependencias PHP:
+
+```bash
+composer install
+```
+
+3. Se for usar o Vite ou alterar assets de frontend, instale as dependencias JavaScript:
+
+```bash
+npm install
+```
+
+> Se a aplicacao ja estiver rodando corretamente apenas com `php artisan serve`, este passo pode ser ignorado.
+
+4. Crie o arquivo de ambiente:
+
+```bash
+cp .env.example .env
+```
+
+No Windows PowerShell, use:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+5. Gere a chave da aplicacao:
+
+```bash
+php artisan key:generate
+```
+
+6. Configure o banco no arquivo `.env`:
+
+```env
+APP_NAME=IFounds
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=pgsql
+DB_HOST=localhost
+DB_PORT=5432
+DB_DATABASE=ifounds
+DB_USERNAME=postgres
+DB_PASSWORD=sua_senha
+```
+
+7. Crie o link simbolico para arquivos enviados:
+
+```bash
+php artisan storage:link
+```
+
+Esse passo e importante porque as imagens dos itens sao salvas em `storage/app/public` e exibidas pela aplicacao a partir de `/storage`.
+
+## 🧬 Como rodar as migrations
+
+Execute as migrations:
+
+```bash
+php artisan migrate
+```
+
+> Em ambiente de desenvolvimento, se precisar recriar tudo do zero, use `php artisan migrate:fresh --seed`. Esse comando apaga os dados existentes.
+
+## ▶️ Como rodar o projeto
+
+Inicie o servidor Laravel:
+
+```bash
+php artisan serve
+```
+
+Se estiver usando Vite para desenvolvimento de assets, em outro terminal execute:
+
+```bash
+npm run dev
+```
+
+Acesse:
+
+```text
+http://127.0.0.1:8000
+```
+
+Tambem existe um script Composer para ambiente de desenvolvimento:
+
+```bash
+composer run dev
+```
+
+Esse script inicia servidor Laravel, fila, logs e Vite em paralelo. Por isso, ele exige Node.js/NPM instalado. Caso nao tenha NPM, use apenas `php artisan serve`.
+
+## 🧭 Rotas disponiveis
+
+### Rotas publicas
+
+| Metodo | Rota | Controller | Descricao |
+| --- | --- | --- | --- |
+| `GET` | `/` | `LoginPaginaController@index` | Exibe a tela de login ou redireciona usuario autenticado. |
+| `POST` | `/registrar` | `LoginPaginaController@register` | Cadastra novo usuario. |
+| `POST` | `/login` | `LoginPaginaController@login` | Autentica usuario. |
+| `GET` | `/logout` | `LoginPaginaController@logout` | Encerra sessao do usuario. |
+
+### Rotas autenticadas
+
+Essas rotas usam o middleware `auth`.
+
+| Metodo | Rota | Controller | Descricao |
+| --- | --- | --- | --- |
+| `GET` | `/itensperdidos` | `ItemPerdidoController@index` | Lista itens perdidos. |
+| `POST` | `/itensperdidos/novo` | `ItemPerdidoController@store` | Cadastra novo item encontrado. |
+| `GET` | `/item/{id}` | `ItemPaginaController@index` | Exibe detalhes de um item. |
+| `POST` | `/item/{id}/reivindicar` | `ItemPaginaController@reivindicar` | Reivindica um item. |
+| `GET` | `/perfil` | `PerfilController@index` | Exibe perfil e itens publicados pelo usuario. |
+
+### Rotas administrativas
+
+Essas rotas usam os middlewares `auth` e `admin`.
+
+| Metodo | Rota | Controller | Descricao |
+| --- | --- | --- | --- |
+| `GET` | `/admin` | `AdministracaoController@index` | Exibe painel administrativo. |
+| `POST` | `/admin/novo` | `AdministracaoController@store` | Cadastra item pela area administrativa. |
+| `DELETE` | `/admin/deletar` | `AdministracaoController@destroy` | Remove um item. |
+| `PUT` | `/admin/editar` | `AdministracaoController@update` | Atualiza dados de um item. |
+| `POST` | `/admin/tornar-admin` | `AdministracaoController@tornarAdmin` | Promove usuario a administrador. |
+
+## 📁 Estrutura de pastas relevante
+
+```text
+app/
++-- Http/
+|   +-- Controllers/
+|   |   +-- AdministracaoController.php
+|   |   +-- ItemPerdidoController.php
+|   |   +-- itemPaginaController.php
+|   |   +-- LoginPaginaController.php
+|   |   +-- PerfilController.php
+|   +-- Middleware/
+|       +-- CheckAdmin.php
++-- Models/
+|   +-- Item.php
+|   +-- User.php
+
+database/
++-- migrations/
++-- seeders/
+    +-- DatabaseSeeder.php
+    +-- ItensSeeder.php
+
+public/
++-- css/
++-- img/
++-- script/
+
+resources/
++-- js/
++-- views/
+    +-- Login/
+    +-- components/
+    +-- itens/
+
+routes/
++-- web.php
++-- console.php
+```
+
+## 🔐 Regras de acesso
+
+- Usuarios nao autenticados acessam apenas login, cadastro e autenticacao.
+- Usuarios autenticados acessam listagem de itens, detalhes, reivindicacao e perfil.
+- Administradores acessam o painel `/admin`.
+- O primeiro usuario cadastrado no sistema recebe `is_admin = true` automaticamente.
+- O middleware `CheckAdmin` bloqueia usuarios sem permissao administrativa com erro `403`.
